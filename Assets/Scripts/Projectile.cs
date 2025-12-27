@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         // Move the bullet forward (up)
-        if (rb != null) rb.linearVelocity = transform.up * speed;
+        if (rb != null) rb.velocity = transform.up * speed;
         
         // Destroy bullet after 3 seconds so it doesn't clutter the game
         Destroy(gameObject, lifetime);

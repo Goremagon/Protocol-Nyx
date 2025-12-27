@@ -7,6 +7,16 @@ public class EnemySpawner : MonoBehaviour
     public float xLimit = 8f;
     private bool warnedMissingPrefab;
 
+    void OnEnable()
+    {
+        GameManager.GameOverEvent += StopSpawning;
+    }
+
+    void OnDisable()
+    {
+        GameManager.GameOverEvent -= StopSpawning;
+    }
+
     void Start()
     {
         InvokeRepeating("SpawnEnemy", 1f, spawnInterval);

@@ -8,7 +8,7 @@ namespace ProjectNyx
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private Vector2 velocity = Vector2.zero;
         [SerializeField] private Vector2 acceleration = Vector2.zero;
-        [SerializeField] private float perceptionRadius = 10f;
+        [SerializeField] public float perceptionRadius = 10f;
         [SerializeField] private float avoidanceRadius = 3f;
         
         public Rigidbody2D Rigidbody => rb;
