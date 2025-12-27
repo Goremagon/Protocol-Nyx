@@ -1,0 +1,17 @@
+Library/
+Temp/
+Logs/
+UserSettings/
+Build/
+.vs/
+*.csproj
+*.sln
+*.meta
+*.unity
+*.prefab
+*.asset
+*.mat
+*.png
+*.jpg
+*.ogg
+*.wav

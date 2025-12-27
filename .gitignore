@@ -1,0 +1,45 @@
+# SUBFOLDER-SAFE UNITY GITIGNORE
+
+# 1. Standard Unity Junk (Matches anywhere)
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# 2. Visual Studio / Code Junk
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# 3. OS Junk
+.DS_Store
+Thumbs.db
+
+# 4. EXPLICITLY IGNORE PLACEHOLDERS
+# This ignores the folder we discussed for your messy 3D models
+_Placeholders/
+Assets/_Placeholders/
+
+# 5. NEVER IGNORE THESE (Keep these safe)
+!*.meta
+!*.unity
+!*.prefab
+!*.mat
+!*.asset
+!ProjectSettings/
