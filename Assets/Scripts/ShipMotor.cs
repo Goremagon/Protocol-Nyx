@@ -51,6 +51,6 @@ public class ShipMotor : MonoBehaviour
             
         // Space Friction (Stop when not inputting)
         if (input.sqrMagnitude < 0.01f)
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 1f * Time.fixedDeltaTime);
+            rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, 1f * Time.fixedDeltaTime);
     }
 }

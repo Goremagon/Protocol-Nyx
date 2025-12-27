@@ -1,13 +1,20 @@
-using UnityEngine;
-
+[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
     public float speed = 3f;
     public int damage = 1;
 
-    void Update()
+    private Rigidbody2D rb;
+
+    private void Awake()
     {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = Vector2.down * speed;
+
         // Destroy if off screen
         if (transform.position.y < -10f) Destroy(gameObject);
     }

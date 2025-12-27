@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public static event Action GameOverEvent;
     public int score;
     public TextMeshProUGUI scoreText;
     private bool isGameOver;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
         isGameOver = true;
         Debug.Log("Game Over! Reloading scene in 2 seconds.");
+        GameOverEvent?.Invoke();
         Invoke(nameof(ReloadScene), 2f);
     }
 
