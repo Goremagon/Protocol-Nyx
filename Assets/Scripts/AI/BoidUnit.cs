@@ -10,19 +10,27 @@ namespace ProjectNyx
         [SerializeField] private Vector2 acceleration = Vector2.zero;
         [SerializeField] public float perceptionRadius = 10f;
         [SerializeField] private float avoidanceRadius = 3f;
+        public float maxSpeed = 5f;
         
         public Rigidbody2D Rigidbody => rb;
         public Vector2 Velocity => velocity;
         public Vector2 Acceleration => acceleration;
         public float PerceptionRadius => perceptionRadius;
         public float AvoidanceRadius => avoidanceRadius;
+
+        public void ApplyForce(Vector2 force)
+        {
+            acceleration += force;
+        }
         
         // Physics update: apply force to Rigidbody2D
         public void UpdatePhysics()
         {
+            velocity += acceleration * Time.deltaTime;
+            velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
+            rb.linearVelocity = velocity;
             rb.velocity = velocity;
-            // Clamp velocity to prevent excessive speed (optional)
-            rb.velocity = Vector2.ClampMagnitude(rb.velocity, 10f);
+            acceleration = Vector2.zero;
         }
         
         // Reset acceleration for next frame
