@@ -16,13 +16,23 @@ namespace ProjectNyx
         public Vector2 Acceleration => acceleration;
         public float PerceptionRadius => perceptionRadius;
         public float AvoidanceRadius => avoidanceRadius;
+
+        public void ApplyForce(Vector2 force)
+        {
+            acceleration += force;
+        }
         
         // Physics update: apply force to Rigidbody2D
         public void UpdatePhysics()
         {
+            velocity += acceleration * Time.deltaTime;
             rb.velocity = velocity;
+
             // Clamp velocity to prevent excessive speed (optional)
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, 10f);
+            velocity = rb.velocity;
+
+            ResetAcceleration();
         }
         
         // Reset acceleration for next frame
