@@ -10,6 +10,7 @@ namespace ProjectNyx
         [SerializeField] private Vector2 acceleration = Vector2.zero;
         [SerializeField] public float perceptionRadius = 10f;
         [SerializeField] private float avoidanceRadius = 3f;
+        public float maxSpeed = 5f;
         
         public Rigidbody2D Rigidbody => rb;
         public Vector2 Velocity => velocity;
@@ -33,6 +34,10 @@ namespace ProjectNyx
             velocity = rb.velocity;
 
             ResetAcceleration();
+            velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
+            rb.linearVelocity = velocity;
+            rb.velocity = velocity;
+            acceleration = Vector2.zero;
         }
         
         // Reset acceleration for next frame
