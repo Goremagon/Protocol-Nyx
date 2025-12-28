@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int score;
     public TextMeshProUGUI scoreText;
     private bool isGameOver;
+    private bool resetScoreOnNextLoad;
 
     void Awake()
     {
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver) return;
         isGameOver = true;
+        resetScoreOnNextLoad = true;
         Debug.Log("Game Over! Reloading scene in 2 seconds.");
         GameOverEvent?.Invoke();
         Invoke(nameof(ReloadScene), 2f);
@@ -90,6 +92,16 @@ public class GameManager : MonoBehaviour
         }
 
         isGameOver = false;
+        if (resetScoreOnNextLoad || scene.name.Equals("MainMenu", StringComparison.OrdinalIgnoreCase))
+        {
+            ResetScore();
+            resetScoreOnNextLoad = false;
+        }
+        UpdateScoreText();
+    }
+
+    public void ResetScore()
+    {
         score = 0;
         UpdateScoreText();
     }

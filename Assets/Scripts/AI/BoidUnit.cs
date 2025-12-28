@@ -3,6 +3,7 @@ using UnityEngine;
 namespace ProjectNyx
 {
     [System.Serializable]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class BoidUnit : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D rb;
@@ -18,6 +19,20 @@ namespace ProjectNyx
         public float PerceptionRadius => perceptionRadius;
         public float AvoidanceRadius => avoidanceRadius;
 
+        private void Awake()
+        {
+            if (rb == null)
+            {
+                rb = GetComponent<Rigidbody2D>();
+            }
+
+            if (rb == null)
+            {
+                Debug.LogWarning($"{nameof(BoidUnit)} on {name} requires a Rigidbody2D. Disabling behavior.");
+                enabled = false;
+            }
+        }
+
         public void ApplyForce(Vector2 force)
         {
             acceleration += force;
@@ -26,7 +41,14 @@ namespace ProjectNyx
         // Physics update: apply force to Rigidbody2D
         public void UpdatePhysics()
         {
-            velocity += acceleration * Time.deltaTime;
+            if (rb == null)
+            {
+                return;
+            }
+
+            float deltaTime = Time.fixedDeltaTime;
+
+            velocity += acceleration * deltaTime;
             rb.velocity = velocity;
 
             // Clamp velocity to prevent excessive speed (optional)
@@ -35,7 +57,6 @@ namespace ProjectNyx
 
             ResetAcceleration();
             velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
-            rb.linearVelocity = velocity;
             rb.velocity = velocity;
             acceleration = Vector2.zero;
         }
