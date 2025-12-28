@@ -27,6 +27,13 @@ namespace ProjectNyx
         public void UpdatePhysics()
         {
             velocity += acceleration * Time.deltaTime;
+            rb.velocity = velocity;
+
+            // Clamp velocity to prevent excessive speed (optional)
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, 10f);
+            velocity = rb.velocity;
+
+            ResetAcceleration();
             velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
             rb.linearVelocity = velocity;
             rb.velocity = velocity;
