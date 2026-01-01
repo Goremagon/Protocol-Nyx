@@ -44,6 +44,16 @@ namespace ProjectNyx
             // Run the brain
             stateMachine.Update();
             
+            // Physics stays in fixed timestep
+        }
+
+        private void FixedUpdate()
+        {
+            if (boid == null)
+            {
+                return;
+            }
+
             // Run the physics
             boid.UpdatePhysics();
         }

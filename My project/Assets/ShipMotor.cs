@@ -42,7 +42,7 @@ public class ShipMotor : MonoBehaviour
         if (moveInput.sqrMagnitude == 0)
         {
             // If let go of keys, slow down slightly faster (Space friction)
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 1f * Time.fixedDeltaTime);
+            rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, 1f * Time.fixedDeltaTime);
         }
     }
 }
